@@ -263,13 +263,6 @@ $(document).ready(function() {
   var shuffleMode = "clone";
   var rgbMode = "position";
 
-  var link = document.createElement('textarea');
-  link.innerHTML = 'download image';
-
-  link.innerHTML = canvas.toDataURL();
-  
-
-document.body.appendChild(link);
   img.onload = function() {
     drawImg(canvas, this)
   }

@@ -380,33 +380,26 @@ This kind of shuffling can be done for the x and y positions. But to move all th
 ### [](#header-3)Try for yourself
 
 
-<table style="width:100%">
-  <tr>
-    <td>
-      <canvas id="screen" width="300" height="300"></canvas>
-</td>
-    <td>
-        <button class="back">back</button>
-        <button class="next">forward</button>
-
-        <form action="#">
-          <p class="flavor">
-          <input type="radio" id="clone" name="flav" checked>
-          <label for="clone">Clone</label>
-          <br>
-          <input type="radio" id="mirror" name="flav">
-          <label for="mirror">Mirror </label>
-          <br>
-          <input type="radio" id="twist" name="flav">
-          <label for="twist">Twist</label>
-          </p>
+<p class="flavor">
+    <input type="radio" id="clone" name="flav" checked>
+    <label for="clone">Clone&nbsp;</label>
+    <input type="radio" id="mirror" name="flav">
+    <label for="mirror">Mirror&nbsp;</label>
+    <input type="radio" id="twist" name="flav">
+  <label for="twist">Twist&nbsp;</label>
 <p class="type">
-     <input type="radio" id="position" name="typ" checked>
-     <label for="position">Position</label>
-     <br>
-     <input type="radio" id="rgb" name="typ">
-     <label for="rgb">Rgb</label>
-     <br>
+    <input type="radio" id="position" name="typ" checked>
+    <label for="position">Position&nbsp;</label>
+    <input type="radio" id="rgb" name="typ">
+    <label for="rgb">RGB&nbsp;</label>
+ </p>
+   <p class="moveButtons">
+
+   <button class="back">back</button>
+   <button class="next">forward</button>
+   </p>
+   <canvas id="screen" width="300" height="300"></canvas>
+
    
      
 
