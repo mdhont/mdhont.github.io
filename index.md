@@ -384,7 +384,6 @@ This kind of shuffling can be done for the x and y positions. But to move all th
   <tr>
     <td>
       <canvas id="screen" width="300" height="300"></canvas>
-
 </td>
     <td>
         <button class="back">back</button>
