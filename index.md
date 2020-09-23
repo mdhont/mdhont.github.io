@@ -370,15 +370,20 @@ So basically the pixels are being shuffled like a deck of cards and after variou
 </p>
 </div>
 </div>
-
 <br>
 
 ---
 
 This kind of shuffling can be done for the x and y positions. But to move all those pixels around, another aproach was needed, using Javascript and a canvas element. The following script recalculates each pixel position back or forward, using three different algorithms, clone, mirror and twist, which can be applied to both position and RGB values. If you combine them - for example - back twist -> forward clone etc, it's funny to see how certain patterns emerge. The RGB only works forward and only with clone and mirror.
 
-### [](#header-3)Try for yourself
+### [](#header-3)In 3D
 
+Same rules applied to points in a 3D plane. You can move around and zoom in and out using the mouse.
+<div id="canvas_holder">
+</div>
+
+
+### [](#header-3)Try for yourself
 
 <p class="flavor">
     <input type="radio" id="clone" name="flav" checked>
@@ -399,7 +404,3 @@ This kind of shuffling can be done for the x and y positions. But to move all th
    <button class="next">forward</button>
    </p>
    <canvas id="screen" width="300" height="300"></canvas>
-
-   
-     
-
