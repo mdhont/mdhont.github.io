@@ -382,6 +382,10 @@ Same rules applied to points in a 3D plane. You can move around and zoom in and 
 <div id="canvas_holder">
 </div>
 
+### Gallery
+
+Check the [Gallery](./gallery.html) for more images.
+
 
 ### [](#header-3)Try for yourself
 
