@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Image Inception | Michiel D’Hont</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Image Inception" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Michiel D’Hont" />
+<meta property="og:description" content="Michiel D’Hont" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="Image Inception" />
+<script type="application/ld+json">
+{"headline":"Image Inception","url":"http://localhost:4000/","name":"Image Inception","description":"Michiel D’Hont","@type":"WebSite","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Image Inception</h1>
+      <h2 class="project-tagline">Michiel D'Hont</h2>
+      
+    </section>
+
+    <section class="main-content">
+      <h3 id="-the-strange-effect"><a href="#header-3"></a> The strange effect</h3>
+
+<p>This effect was originally discovered by my father - Bram Dhont - who as a visual artist was working a lot with Photoshop at the time. He ran a macro on an image which had the following logic:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>original image -&gt; rotate 0° -&gt; resize 1/2 -&gt; position {top: 0 left: 0}    
+original image -&gt; rotate 90° -&gt; resize 1/2 -&gt; position {top: 0 left: originalImageWidth/2}    
+original image -&gt; rotate 180° -&gt; resize 1/2 -&gt; position {top: originalImageHeigth/2 left: originalImageWidth/2}    
+original image -&gt; rotate 270° -&gt; resize 1/2 -&gt; position {top: 0 left: originalImageWidth/2}   
+</code></pre></div></div>
+
+<p>The result of running the script:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>After one round</td>
+      <td>After 5 rounds</td>
+      <td>After 10 rounds</td>
+    </tr>
+    <tr>
+      <td><img src="/images/twistExample.png" alt="" /></td>
+      <td><img src="/images/twistExample_2.png" alt="" /></td>
+      <td><img src="/images/twistExample_3.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After five rounds the image contains a lot of tiny sunflowers. After ten rounds the flowers are gone and seem irretrievably lost.</p>
+
+<p>But, surprise, after twenty five rounds the original image suddenly returns.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="/images/twistExample_4.png" alt="" /></td>
+      <td><img src="/images/twistExample_5.png" alt="" /></td>
+      <td><img src="/images/twistExample_6.png" alt="" /></td>
+      <td><img src="/images/twistExample_7.png" alt="" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We were going to have sunflower soup for dinner, so what’s up with that?</p>
+
+<h3 id="-the-explanation"><a href="#header-3"></a> The explanation</h3>
+
+<p>I only found out what caused it after reproducing it with PHP and ImageMagick, using a very small image.</p>
+
+<p>Let’s imagine an image with only four pixels:</p>
+<table>
+<tr>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:black;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<p>Now let’s make four copies and rotate them 0°, 90°, 180° and 270° respectively.</p>
+
+<table>
+<tr>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:black;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+
+</td>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:black;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+
+</td>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:black;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+
+</td>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:black;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<p>The default algorithm used to downsize images half the size is an <a href="http://www.imagemagick.org/Usage/filter/#point">unscaled interpolation filter</a>, which eliminates the even numbered rows and columns across the image. So if we resize our four pixel images to half their size the filter would simply take away the first column and the first row of pixels, so the resized images would look like this:</p>
+
+<table>
+<tr>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+
+</td>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+
+</td>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:black;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+
+</td>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<p>The last thing we need to do is to put each image in it’s place following the scripts logic. Which would result in the following image, which is an inverted version of the original.</p>
+
+<table>
+<tr>
+<td>
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:black;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<p>Running the script again will bring back the original image.</p>
+
+<p>When you scale an image to half it’s size, the image will have 25% of the original information. But by rotating the image and <em>then</em> resizing it, that 25% will have different information. Each pixel is saved one out of four times so the information is never lost.</p>
+
+<h3 id="-do-the-shuffle"><a href="#header-3"></a> Do the shuffle</h3>
+
+<p>So basically the pixels are being shuffled like a deck of cards and after various iterations they return to their starting point. Different variations are possible.</p>
+
+<div style="float:left;width:100%;">
+<div style="float:left;">
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td>0
+</td>
+<td>1
+</td>
+<td>2
+</td>
+<td>3
+</td>
+<td>4
+</td>
+<td>5
+</td>
+</tr>
+<tr>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+<p style="width:300px;font-size:14px;">A single line of pixels is rearanged each new line by combining the odd numbered pixels and placing them on the left half and the even numbered pixels on the right half.
+</p>
+</div>
+
+<div style="float:left; margin-left:50px;">
+<table style="border:1px;width;100px;height;100px;">
+<tr>
+<td>0
+</td>
+<td>1
+</td>
+<td>2
+</td>
+<td>3
+</td>
+<td>4
+</td>
+<td>5
+</td>
+</tr>
+<tr>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+</tr>
+<tr>
+<td style="background-color:orange;width:50px;height:50px;">
+</td>
+<td style="background-color:green;width:50px;height:50px;">
+</td>
+<td style="background-color:purple;width:50px;height:50px;">
+</td>
+<td style="background-color:yellow;width:50px;height:50px;">
+</td>
+<td style="background-color:pink;width:50px;height:50px;">
+</td>
+<td style="background-color:blue;width:50px;height:50px;">
+</td>
+</tr>
+</table>
+<p style="width:300px;font-size:14px;">A single line of pixels is rearanged each new line by placing the right most pixel first, the leftmost pixel second the second right most third, the second left most fourth and keep on moving inwards.
+</p>
+</div>
+</div>
+<p><br /></p>
+
+<hr />
+
+<p>This kind of shuffling can be done for the x and y positions. But to move all those pixels around, another aproach was needed, using Javascript and a canvas element. The following script recalculates each pixel position back or forward, using three different algorithms, clone, mirror and twist, which can be applied to both position and RGB values. If you combine them - for example - back twist -&gt; forward clone etc, it’s funny to see how certain patterns emerge. The RGB only works forward and only with clone and mirror.</p>
+
+<h3 id="in-3d"><a href="#header-3"></a>In 3D</h3>
+
+<p>Same rules applied to points in a 3D plane. You can move around and zoom in and out using the mouse.</p>
+<div id="canvas_holder">
+</div>
+
+<h3 id="gallery">Gallery</h3>
+
+<p>Check the <a href="./gallery.html">Gallery</a> for more images.</p>
+
+<h3 id="try-for-yourself"><a href="#header-3"></a>Try for yourself</h3>
+
+<p class="flavor">
+    <input type="radio" id="clone" name="flav" checked="" />
+    <label for="clone">Clone&nbsp;</label>
+    <input type="radio" id="mirror" name="flav" />
+    <label for="mirror">Mirror&nbsp;</label>
+    <input type="radio" id="twist" name="flav" />
+  <label for="twist">Twist&nbsp;</label>
+<p class="type">
+    <input type="radio" id="position" name="typ" checked="" />
+    <label for="position">Position&nbsp;</label>
+    <input type="radio" id="rgb" name="typ" />
+    <label for="rgb">RGB&nbsp;</label>
+ </p>
+   <p class="moveButtons">
+
+   <button class="back">back</button>
+   <button class="next">forward</button>
+   </p>
+   <canvas id="screen" width="300" height="300"></canvas>
+</p>
+
+
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="/app/js/vendor/bootstrap.min.js"></script>
+      <script src="/app/dansa.js?dbfddd23" type="text/javascript"></script>
+      <script src="https://threejs.org/build/three.js"></script>
+      <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+      <script src="/app/js/distributor.js"></script>
+ 
+    
+  </body>
+</html>
