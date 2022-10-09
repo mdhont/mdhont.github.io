@@ -2,7 +2,7 @@
 layout: default
 ---
 
-### [](#header-3) The strange effect
+### [](#header-3) The very strange effect
 
 This effect was originally discovered by my father - Bram Dhont - who as a visual artist was working a lot with Photoshop at the time. He ran a macro on an image which had the following logic:
 
